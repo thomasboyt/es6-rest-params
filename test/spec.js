@@ -13,6 +13,7 @@ var compileFixture = function(name) {
 describe('rest params', function() {
   it('compile to an array', function() {
     var out = compileFixture('rest');
+    console.log(out.code);
     eval(out.code);
   });
 });
