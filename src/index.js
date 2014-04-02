@@ -34,5 +34,6 @@ function compile(source, customOptions) {
 }
 
 module.exports = {
-  compile: compile
+  compile: compile,
+  transform: transform
 };
