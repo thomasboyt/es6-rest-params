@@ -5,11 +5,12 @@
   "main": "src/index.js",
   "dependencies": {
     "esprima": "git://github.com/ariya/esprima.git#harmony",
-    "recast": "^0.5.14",
+    "recast": "^0.5.14"
+  },
+  "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.18.2"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
