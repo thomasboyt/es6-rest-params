@@ -13,7 +13,7 @@
     "es6-arrow-function": "^0.2.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha -C"
+    "test": "./node_modules/.bin/mocha --reporter spec --no-colors"
   },
   "author": "Thomas Boyt",
   "license": "MIT"
