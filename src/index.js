@@ -6,7 +6,9 @@ var n = recast.types.namedTypes;
 var b = recast.types.builders;
 
 function nodeVisitor(node) {
-  if ( n.FunctionExpression.check(node) && node.rest) {
+  if ( (n.FunctionExpression.check(node) ||
+        n.FunctionDeclaration.check(node) ||
+        n.ArrowFunctionExpression.check(node) ) && node.rest) {
     var numArgs = node.params.length;
 
     node.body.body.unshift(
