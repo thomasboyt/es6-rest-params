@@ -7,6 +7,10 @@
     "esprima": "git://github.com/ariya/esprima.git#harmony",
     "recast": "^0.5.14"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomasboyt/es6-rest-params"
+  },
   "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.18.2",
