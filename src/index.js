@@ -16,17 +16,17 @@ function nodeVisitor(node) {
       b.variableDeclaration('var', [
         b.variableDeclarator(
           node.rest,
-          b.memberExpression(
-            b.arrayExpression([]),
+          b.callExpression(
             b.memberExpression(
-              b.identifier('slice'),
-              b.callExpression(
-                b.identifier('call'),
-                [b.identifier('arguments'), b.literal(numArgs)]
+              b.memberExpression(
+                b.arrayExpression([]),
+                b.identifier('slice'),
+                false
               ),
+              b.identifier('call'),
               false
             ),
-            false
+            [b.identifier('arguments'), b.literal(numArgs)]
           )
         )
       ])
