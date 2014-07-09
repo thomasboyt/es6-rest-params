@@ -2,16 +2,20 @@ var esprimaHarmony = require('esprima');
 
 var recast = require('recast');
 var types = recast.types;
-var n = recast.types.namedTypes;
 var b = recast.types.builders;
 
-function nodeVisitor(node) {
-  if ( (n.FunctionExpression.check(node) ||
-        n.FunctionDeclaration.check(node) ||
-        n.ArrowFunctionExpression.check(node) ) && node.rest) {
+var visitor = types.PathVisitor.fromMethodsObject({
+  visitFunction: function(path) {
+    this.traverse(path);
+
+    var node = path.value;
+    if (!node.rest) {
+      return;
+    }
+
     var numArgs = node.params.length;
 
-    node.body.body.unshift(
+    path.get("body", "body").unshift(
       // var args = [].call(arguments, 1);
       b.variableDeclaration('var', [
         b.variableDeclarator(
@@ -32,12 +36,12 @@ function nodeVisitor(node) {
       ])
     );
 
-    delete node.rest;
+    node.rest = null;
   }
-}
+});
 
 function transform(ast) {
-  return types.traverse(ast, nodeVisitor);
+  return recast.visit(ast, visitor);
 }
 
 /**
