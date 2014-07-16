@@ -1,5 +1,3 @@
-var esprimaHarmony = require('esprima');
-
 var recast = require('recast');
 var types = recast.types;
 var n = recast.types.namedTypes;
@@ -49,7 +47,6 @@ function transform(ast) {
 function compile(source, customOptions) {
   customOptions = customOptions || {};
   var recastOptions = {
-    esprima: esprimaHarmony
   };
 
   for ( var key in customOptions ) {
