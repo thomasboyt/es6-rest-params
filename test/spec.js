@@ -7,7 +7,6 @@ var vm = require('vm');
 var expect = require('chai').expect;
 
 var recast = require('recast');
-var esprima = require('esprima');
 var transform = require('../src/index').transform;
 
 var fixturePath = function(name) {
@@ -16,7 +15,7 @@ var fixturePath = function(name) {
 
 var compileFixture = function(path, options) {
   var src = fs.readFileSync(path);
-  var ast = recast.parse(src, { esprima: esprima });
+  var ast = recast.parse(src);
   if (options && options.arrowFn) {
     src = require('es6-arrow-function').transform(ast);
   }
