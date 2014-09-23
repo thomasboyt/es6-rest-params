@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "dependencies": {
-    "esprima": "git://github.com/ariya/esprima.git#harmony",
+    "esprima-fb": "^6001.1001.0-dev-harmony-fb",
     "recast": "^0.5.17"
   },
   "repository": {
