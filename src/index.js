@@ -1,14 +1,17 @@
-var esprimaHarmony = require('esprima');
-
 var recast = require('recast');
 var types = recast.types;
-var n = recast.types.namedTypes;
+var PathVisitor = types.PathVisitor;
 var b = recast.types.builders;
 
-function nodeVisitor(node) {
-  if ( (n.FunctionExpression.check(node) ||
-        n.FunctionDeclaration.check(node) ||
-        n.ArrowFunctionExpression.check(node) ) && node.rest) {
+function Visitor() {
+  PathVisitor.apply(this, arguments);
+}
+Visitor.prototype = Object.create(PathVisitor.prototype);
+Visitor.prototype.constructor = Visitor;
+
+Visitor.prototype.visitFunction = function(path) {
+  var node = path.node;
+  if (node.rest) {
     var numArgs = node.params.length;
 
     node.body.body.unshift(
@@ -34,25 +37,27 @@ function nodeVisitor(node) {
 
     delete node.rest;
   }
-}
+
+  this.traverse(path);
+};
+
+var VISITOR = new Visitor();
 
 function transform(ast) {
-  return types.traverse(ast, nodeVisitor);
+  return types.visit(ast, VISITOR);
 }
 
 /**
  * @param {string} source
- * @param {Object} recastOptions
+ * @param {object} customOptions
  * @return {string}
  */
 
 function compile(source, customOptions) {
   customOptions = customOptions || {};
-  var recastOptions = {
-    esprima: esprimaHarmony
-  };
+  var recastOptions = {};
 
-  for ( var key in customOptions ) {
+  for (var key in customOptions) {
     recastOptions[key] = customOptions[key];
   }
 
