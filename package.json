@@ -4,16 +4,16 @@
   "description": "",
   "main": "src/index.js",
   "dependencies": {
-    "recast": "^0.8.0"
+    "recast": "^0.9.11"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomasboyt/es6-rest-params"
   },
   "devDependencies": {
-    "chai": "^1.9.2",
-    "mocha": "^2.0.1",
-    "es6-arrow-function": "^0.6.0"
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0",
+    "es6-arrow-function": "^0.6.5"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --no-colors"
